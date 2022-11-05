@@ -1,7 +1,7 @@
 <template>
   <div class="home-container">
     <Head></Head>
-    <Search></Search>
+    <Carousel></Carousel>
     <div class="main">
       <div class="left">
         <Left>
@@ -27,16 +27,16 @@
 
 <script>
 import Head from '@/components/Head.vue'
-import Search from '@/components/home/search/Search.vue'
 import Left from '../../components/home/left/Left.vue'
 import Right from '../../components/home/right/Right.vue'
+import Carousel from '@/components/home/carousel/Carousel.vue'
 // import Ranking from '@/components/goods/ranking/Ranking.vue'
 // import GoodGroup from '../../components/goods/group/GoodGroup.vue'
 export default {
   name: 'MyHome',
   components: {
     Head,
-    Search,
+    Carousel,
     Left,
     Right // GoodGroup
 

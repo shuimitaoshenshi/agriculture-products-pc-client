@@ -1,8 +1,13 @@
 <template>
-  <div class="login-container">
-    <img src="@/assets/loginBackground.png" alt="" class="login-background" />
+  <div class="login-main-container">
+    <!-- <img
+      :src="require('@/assets/loginBackground.png')"
+      alt="1"
+      class="login-background"
+    /> -->
     <div class="logo-name">
       <img src="@/assets/logo.png" alt="" class="logo" />
+      <!-- <h1 class="name">农产品</h1> -->
       <img src="@/assets/name.png" alt="" class="name" />
       <img src="@/assets/logo.png" alt="" class="logo" />
     </div>
@@ -33,23 +38,36 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.login-background {
-  z-index: -1;
-  position: absolute;
-  scale: 2;
-}
-.logo-name {
-  display: block;
-  margin: 0 auto;
-  width: 1000px;
-  height: 200px;
-  .logo {
-    width: 200px;
+.login-main-container {
+  // background-attachment: fixed;
+  // .login-background {
+  //   z-index: -1;
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   scale: 2;
+  // }
+  height: 1000px;
+  background: url('@/assets/loginBackground.png') no-repeat;
+  background-size: 100% 100%;
+
+  .logo-name {
+    // display: block;
+    margin: 0 auto;
+    width: 1000px;
     height: 200px;
-  }
-  .name {
-    width: 600px;
-    height: 200px;
+    .logo {
+      width: 200px;
+      height: 200px;
+      float: left;
+    }
+    .name {
+      width: 600px;
+      height: 200px;
+      line-height: 200px;
+      text-align: center;
+      float: left;
+    }
   }
 }
 </style>

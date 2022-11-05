@@ -18,7 +18,7 @@
           </button>
           <a class="navbar-brand" href="#">
             <img src="@/assets/logo.png" alt="" />
-            <span>想吃杨梅</span>
+            <span>农产品</span>
           </a>
         </div>
 

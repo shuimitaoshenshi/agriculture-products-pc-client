@@ -1,6 +1,10 @@
 <template>
   <div class="gooditem-container" ref="gooditemRef">
-    <div class="rand" v-if="rand">{{ rand }}</div>
+    <!-- <div class="rand" v-if="rand">{{ rand }}</div> -->
+    <div class="newCus" v-if="isNewCus">
+      <div class="base"></div>
+      <span>新客户独享</span>
+    </div>
     <div class="left">
       <div class="pic">
         <img :src="pic" alt="111" />
@@ -9,10 +13,13 @@
     <div class="right">
       <div class="top">
         <div class="name">{{ name }}</div>
+        <div class="price">¥{{ price }}</div>
       </div>
       <div class="bottom">
-        <div class="price">¥{{ price }}</div>
-        <div class="sales">{{ sales }}单</div>
+        <div class="store">库存{{ store }}件</div>
+        <div class="button">
+          <v-btn color="success"> 立即选购 </v-btn>
+        </div>
       </div>
     </div>
   </div>
@@ -40,6 +47,14 @@ export default {
     sales: {
       type: Number,
       default: -1
+    },
+    store: {
+      type: Number,
+      default: 0
+    },
+    isNewCus: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -65,20 +80,40 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@randHeight: 20px;
+// @randHeight: 20px;
+// @buttonHeight:40px;
 .gooditem-container {
   position: relative;
   display: flex;
   margin: 5px;
   padding: 5px;
   background-color: grey;
-  padding-top: @randHeight;
-  flex-wrap: wrap;
+  // padding-top: @randHeight;
+  // flex-wrap: wrap;
   > .rand {
     position: absolute;
     top: 0;
-    height: @randHeight;
+    // height: @randHeight;
     font-size: 2rem;
+  }
+  .newCus {
+    position: absolute;
+    top: 0;
+    left: 0;
+    span {
+      position: absolute;
+      margin: 10px;
+      top: 0;
+      display: block;
+      width: 55px;
+      color: white;
+    }
+    .base {
+      width: 0;
+      height: 0;
+      border-top: 100px solid red;
+      border-right: 100px solid transparent;
+    }
   }
   .left {
     float: left;
@@ -93,18 +128,33 @@ export default {
     }
   }
   .right {
+    padding: 10px;
     position: relative;
     float: right;
     flex: 1;
+
     .bottom {
       position: absolute;
       bottom: 0;
       width: 100%;
-      .price {
+      .price,
+      .sales,
+      .store {
         float: left;
+        line-height: 36px;
+        margin-right: 40px;
+        // float: left;
       }
-      .sales {
-        float: right;
+      // .sales {
+      //   // display: block;
+      //   // float: right;
+      // }
+      // .store {
+      //   // display: block;
+      //   // float: right;
+      // }
+      .button {
+        float: left;
       }
     }
   }

@@ -3,9 +3,9 @@ import App from './App.vue'
 import router from './router'
 import vuetify from './plugins/vuetify'
 import $ from 'jquery'
-import '@/assets/css/common.css'
 import '@/bootstrap/css/bootstrap.min.css'
 import '@/bootstrap/js/bootstrap.min.js'
+import '@/assets/css/base.css'
 
 Vue.config.productionTip = false
 Vue.prototype.$ = $

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="head-container">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -71,16 +71,19 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.navbar-brand {
-  border-right: solid 1px #e7e7e7;
-  font-size: 2rem;
-  img {
-    width: 50px;
-    margin-top: -15px;
-    float: left;
+.head-container {
+  width: 100%;
+  .navbar-brand {
+    border-right: solid 1px #e7e7e7;
+    font-size: 2rem;
+    img {
+      width: 50px;
+      margin-top: -15px;
+      float: left;
+    }
   }
-}
-.btn {
-  margin: 10px;
+  .btn {
+    margin: 10px;
+  }
 }
 </style>

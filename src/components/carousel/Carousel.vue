@@ -1,7 +1,12 @@
 <template>
   <div class="carousel-container">
     <v-carousel cycle>
-      <v-carousel-item v-for="(item, i) in items" :key="i" :src="item.src">
+      <v-carousel-item
+        v-for="(item, i) in items"
+        :key="i"
+        :src="item.src"
+        :max-width="maxWidth"
+      >
         <img :src="item.src" :alt="item.src" />
       </v-carousel-item>
     </v-carousel>
@@ -11,6 +16,11 @@
 <script>
 export default {
   name: 'CarouselH',
+  props: {
+    maxWidth: {
+      type: Number
+    }
+  },
   data() {
     return {
       items: [

@@ -4,7 +4,7 @@
     <!-- <slot name="group" class="group"></slot>
     <slot name="default" class="group"></slot> -->
     <div class="items newCus" v-for="item in newCus" :key="item.id">
-      <a href="/info">
+      <router-link to="/info">
         <GoodItem
           :id="item.id"
           :pic="item.pic"
@@ -16,10 +16,10 @@
           :isNewCus="item.isNewCus"
           :sort="item.sort"
         ></GoodItem>
-      </a>
+      </router-link>
     </div>
     <div class="items" v-for="item in goods" :key="item.id">
-      <a href="/info">
+      <router-link to="/info">
         <GoodItem
           :id="item.id"
           :pic="item.pic"
@@ -29,7 +29,7 @@
           :sales="item.sales"
           :store="item.store"
         ></GoodItem>
-      </a>
+      </router-link>
     </div>
   </div>
 </template>
@@ -38,6 +38,11 @@
 import GoodItem from '@/components/goods/GoodItem.vue'
 export default {
   name: 'WaterFall',
+  props: {
+    sorts: {
+      type: String
+    }
+  },
   data() {
     return {
       newCus: [

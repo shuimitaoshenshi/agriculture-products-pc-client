@@ -9,7 +9,7 @@
         <a :name="'/home/' + name">
           <h2>{{ name }}</h2>
         </a>
-        <WaterFall></WaterFall>
+        <WaterFall :sorts="name"></WaterFall>
       </div>
     </div>
   </div>
@@ -17,7 +17,7 @@
 
 <script>
 import Head from '@/components/Head.vue'
-import Carousel from '@/components/home/carousel/Carousel.vue'
+import Carousel from '@/components/carousel/Carousel.vue'
 import WaterFall from '@/components/home/goods/WaterFall.vue'
 import Classify from '@/components/home/classify/HomeClassify.vue'
 import BackTop from '@/components/back/BackTop'

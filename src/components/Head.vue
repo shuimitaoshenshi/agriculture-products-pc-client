@@ -50,6 +50,7 @@
             </li> -->
             <!-- 区域选择菜单 -->
             <li><router-link to="/login">登陆</router-link></li>
+            <li><router-link to="/">首页</router-link></li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">

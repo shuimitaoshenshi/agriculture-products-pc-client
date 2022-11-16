@@ -31,37 +31,78 @@
             </v-col>
           </div>
           <!--  选择商品规格/数量 -->
+          <div class="tools">
+            <!-- 分享 -->
+            <i title="分享" class="glyphicon glyphicon-share-alt"></i>
+            <!-- 分享 -->
+            <!-- 加入购物车 -->
+            <i title="加入购物车" class="glyphicon glyphicon-shopping-cart"></i>
+
+            <!-- 加入购物车 -->
+            <!-- 收藏 -->
+            <i
+              title="取消收藏"
+              class="glyphicon glyphicon-star"
+              v-if="good.isStar"
+              @click="good.isStar = !good.isStar"
+            ></i>
+            <i
+              title="收藏"
+              class="glyphicon glyphicon-star-empty"
+              v-if="!good.isStar"
+              @click="good.isStar = !good.isStar"
+            ></i>
+            <!-- 收藏 -->
+          </div>
+          <!-- 立即购买 -->
+          <div class="buy">
+            <v-btn x-large color="success">
+              <div>立即选购</div>
+            </v-btn>
+          </div>
+          <!-- 立即购买 -->
         </div>
       </div>
       <!-- 商品详情 -->
       <div class="detail">
         <h3>商品详情</h3>
-        <p>商品详情1</p>
+        <p>
+          商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1商品详情1
+        </p>
         <p>商品详情2</p>
         <p>商品详情3</p>
       </div>
+      <div class="comments">
+        <h3>商品评论</h3>
+        <ul>
+          <li class="comment" v-for="item in comments" :key="item.id">
+            <GoodComment :comment="item"></GoodComment>
+          </li>
+        </ul>
+        <div class="addcomment clearfix">
+          <textarea></textarea>
+          <button>发表评论</button>
+        </div>
+      </div>
       <!-- 商品详情 -->
-      <!-- 分享 -->
-      <!-- 分享 -->
-      <!-- 收藏 -->
-      <!-- 收藏 -->
-      <!-- 加入购物车 -->
-      <!-- 加入购物车 -->
-      <!-- 立即购买 -->
-      <!-- 立即购买 -->
     </div>
   </div>
+  <!-- TODO -->
+  <!-- 评论 -->
+  <!-- 评论 -->
+  <!-- TODO -->
 </template>
 
 <script>
 import Head from '@/components/Head.vue'
 import Carousel from '@/components/carousel/Carousel.vue'
-
+import GoodComment from '@/components/goods/GoodComment.vue'
 export default {
   name: 'GoodInfo',
   components: {
     Head,
-    Carousel
+    Carousel,
+    GoodComment
   },
   // props: {
   //   currentSize: {
@@ -76,7 +117,8 @@ export default {
     return {
       good: {
         name: '新鲜杨梅',
-        price: { '100个': 18, '200个': 28, '400个': 68, '600个': 78 }
+        price: { '100个': 18, '200个': 28, '400个': 68, '600个': 78 },
+        isStar: false
       },
       sizes: [
         {
@@ -97,6 +139,11 @@ export default {
         }
       ],
       currentSize: ''
+      // comments: [
+      //   '好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃',
+      //   '好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃',
+      //   '好吃好吃'
+      // ]
     }
   },
   methods: {
@@ -114,16 +161,18 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@heightMargin: 20px;
 .goodinfo-container {
   .goodinfo-main {
-    background: rgb(211, 124, 211);
+    background: rgb(222, 182, 216);
     width: 1200px;
     margin: 0 auto;
-    height: 1000px;
+    // height: 1000px;
     // display: flex;
     .showgood {
       height: 700px;
-      width: 100%;
+      width: 90%;
+      margin: 0 auto;
       border-bottom: solid 1px black;
       .left {
         display: block;
@@ -140,14 +189,62 @@ export default {
         display: block;
         width: 320px;
         margin-left: 50px;
+        .name {
+          margin-bottom: @heightMargin;
+        }
         .price {
           display: block;
           font-size: 32px;
-          color: red;
+          color: blue;
+          margin-bottom: @heightMargin;
           // float: left;
+        }
+        .sizebt {
+          margin-bottom: 180px;
         }
         .col {
           padding: 0;
+          margin-bottom: @heightMargin;
+        }
+        .tools {
+          font-size: 32px;
+          display: flex;
+          i {
+            flex: 1;
+            // margin: 10px;
+          }
+          margin-bottom: @heightMargin;
+        }
+        .buy {
+          display: block;
+          margin-left: 50px;
+          // float: right;
+        }
+      }
+    }
+    .detail {
+      margin: 10px auto;
+      width: 90%;
+    }
+    .comments {
+      margin: 10px auto;
+      width: 90%;
+      .comment {
+        height: 100px;
+      }
+      .addcomment {
+        textarea {
+          width: 100%;
+          height: 200px;
+          border: 1px solid #000000;
+        }
+        button {
+          display: block;
+          width: 150px;
+          height: 50px;
+          background: yellow;
+          margin: 10px;
+          float: right;
         }
       }
     }

@@ -74,6 +74,7 @@ export default {
 <style lang="less" scoped>
 .head-container {
   width: 100%;
+  height: 50px;
   .navbar-brand {
     border-right: solid 1px #e7e7e7;
     font-size: 2rem;

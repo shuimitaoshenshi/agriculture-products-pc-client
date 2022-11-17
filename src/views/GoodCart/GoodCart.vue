@@ -1,5 +1,5 @@
 <template>
-  <div class="myinfo-container">
+  <div class="goodcart-container">
     <Head></Head>
   </div>
 </template>

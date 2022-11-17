@@ -54,8 +54,8 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">我的</a></li>
-            <li><a href="#">联系客服</a></li>
+            <li><router-link to="/my">我的</router-link></li>
+            <li><router-link to="/cart">购物车</router-link></li>
           </ul>
         </div>
         <!-- /.navbar-collapse -->

@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Login from '@/views/Login.vue'
 import Home from '@/views/Home/Home.vue'
 import GoodInfo from '@/views/GoodInfo/GoodInfo.vue'
+import MyInfo from '@/views/MyInfo/MyInfo.vue'
+import GoodCart from '@/views/GoodCart/GoodCart.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -11,7 +13,9 @@ const routes = [
   { path: '/home/:sort', component: Home },
   { path: '/login', component: Login },
   { path: '/register', component: Login },
-  { path: '/info', component: GoodInfo }
+  { path: '/info', component: GoodInfo },
+  { path: '/my', component: MyInfo },
+  { path: '/cart', component: GoodCart }
 ]
 
 const router = new VueRouter({

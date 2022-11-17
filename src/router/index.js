@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '@/views/Login.vue'
 import Home from '@/views/Home/Home.vue'
-import GoodInfo from '@/views/Info/GoodInfo.vue'
+import GoodInfo from '@/views/GoodInfo/GoodInfo.vue'
 Vue.use(VueRouter)
 
 const routes = [

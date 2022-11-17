@@ -2,10 +2,10 @@
   <div class="goodinfo-container">
     <Head></Head>
     <div class="goodinfo-main">
-      <div class="showgood">
+      <div class="showgood clearfix">
         <div class="left">
           <div class="carousel">
-            <Carousel :max-width="500"></Carousel>
+            <Carousel :max-width="600"></Carousel>
           </div>
         </div>
         <div class="right">
@@ -138,12 +138,12 @@ export default {
           size: '600个'
         }
       ],
-      currentSize: ''
-      // comments: [
-      //   '好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃',
-      //   '好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃',
-      //   '好吃好吃'
-      // ]
+      currentSize: '',
+      comments: [
+        '好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃',
+        '好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃好吃',
+        '好吃好吃'
+      ]
     }
   },
   methods: {
@@ -171,16 +171,16 @@ export default {
     // display: flex;
     .showgood {
       height: 700px;
-      width: 90%;
-      margin: 0 auto;
+      width: 100%;
+      // margin: 0 auto;
       border-bottom: solid 1px black;
       .left {
         display: block;
         float: left;
-        width: 510px;
+        // width: 610px;
         .carousel {
-          width: 500px;
-          height: 500px;
+          width: 600px;
+          height: 600px;
           margin: 10px;
         }
       }

@@ -1,26 +1,32 @@
 <template>
   <div class="navigationleft-container">
     <v-navigation-drawer
-      class="deep-purple accent-4"
-      dark
+      class="accent-4 clearfix"
+      permanent
       absolute
-      style="top: 50px"
+      style="top: 52px"
     >
       <v-list>
-        <v-list-item v-for="item in items" :key="item.title" link>
-          <v-list-item-icon>
+        <router-link :to="item.url" v-for="item in items" :key="item.title">
+          <v-list-item link>
+            <!-- <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
+          </v-list-item-icon> -->
 
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>
+                {{ item.title }}
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
       </v-list>
 
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn block> Logout </v-btn>
+          <v-btn block
+            ><router-link to="/login"> 退 出 登 陆 </router-link></v-btn
+          >
         </div>
       </template>
     </v-navigation-drawer>
@@ -32,9 +38,9 @@ export default {
   data() {
     return {
       items: [
-        { title: 'Dashboard', icon: 'mdi-view-dashboard' },
-        { title: 'Account', icon: 'mdi-account-box' },
-        { title: 'Admin', icon: 'mdi-gavel' }
+        { title: '订单', url: '/my/order' },
+        { title: '收藏', url: '/my/star' },
+        { title: '地址管理', url: '/my/address' }
       ]
     }
   }
@@ -46,7 +52,7 @@ export default {
   display: block;
   float: left;
   aside {
-    top: 50px;
+    // top: 52px;
   }
 }
 </style>

@@ -5,6 +5,7 @@ import Home from '@/views/Home/Home.vue'
 import GoodInfo from '@/views/GoodInfo/GoodInfo.vue'
 import MyInfo from '@/views/MyInfo/MyInfo.vue'
 import GoodCart from '@/views/GoodCart/GoodCart.vue'
+import MyAddress from '@/components/myinfo/MyAddress.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -14,7 +15,7 @@ const routes = [
   { path: '/login', component: Login },
   { path: '/register', component: Login },
   { path: '/info', component: GoodInfo },
-  { path: '/my', component: MyInfo },
+  { path: '/my', component: MyInfo, children: [{ path: '', component: MyAddress }, { path: 'address', component: MyAddress }] },
   { path: '/cart', component: GoodCart }
 ]
 

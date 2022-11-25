@@ -2,6 +2,9 @@
   <div class="myinfo-container">
     <Head></Head>
     <NavigationLeft></NavigationLeft>
+    <!-- 地址管理 -->
+    <router-view></router-view>
+    <!-- 地址管理 -->
   </div>
 </template>
 
@@ -12,6 +15,7 @@ export default {
   components: {
     Head,
     NavigationLeft
+    // MyAddress
   }
 }
 </script>

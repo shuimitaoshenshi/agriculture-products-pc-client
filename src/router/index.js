@@ -7,6 +7,7 @@ import MyInfo from '@/views/MyInfo/MyInfo.vue'
 import GoodCart from '@/views/GoodCart/GoodCart.vue'
 import MyAddress from '@/components/myinfo/MyAddress.vue'
 import AgentInfo from '@/components/myinfo/AgentInfo.vue'
+import MyStar from '@/components/myinfo/MyStar.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -16,7 +17,16 @@ const routes = [
   { path: '/login', component: Login },
   { path: '/register', component: Login },
   { path: '/info', component: GoodInfo },
-  { path: '/my', component: MyInfo, children: [{ path: '', component: MyAddress }, { path: 'address', component: MyAddress }, { path: 'agent', component: AgentInfo }] },
+  {
+    path: '/my',
+    component: MyInfo,
+    children: [
+      { path: '', component: MyAddress },
+      { path: 'address', component: MyAddress },
+      { path: 'star', component: MyStar },
+      { path: 'agent', component: AgentInfo }
+    ]
+  },
   { path: '/cart', component: GoodCart }
 ]
 

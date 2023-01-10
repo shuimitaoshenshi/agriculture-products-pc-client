@@ -3,7 +3,7 @@
     <!-- <div class="rand" v-if="rand">{{ rand }}</div> -->
     <div class="newCus" v-if="isNewCus">
       <div class="base"></div>
-      <span>新客户独享</span>
+      <span>新客专享</span>
     </div>
     <div class="left">
       <div class="pic">

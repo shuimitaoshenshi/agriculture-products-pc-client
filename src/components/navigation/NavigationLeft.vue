@@ -43,6 +43,17 @@ export default {
         { title: '地址管理', url: '/my/address' }
       ]
     }
+  },
+  methods: {
+    // 在左导航插入代理人链接
+    insertAgent() {
+      this.items.push({ title: '代理人信息', url: '/my/agent' })
+    }
+  },
+  created() {
+    // 如果是代理人，显示代理人信息
+    // this.insertAgent() ;
+    this.insertAgent()
   }
 }
 </script>

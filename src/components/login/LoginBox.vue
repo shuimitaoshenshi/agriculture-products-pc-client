@@ -28,12 +28,10 @@
                 <div>
                   <v-text-field
                     label="用户名"
-                    :rules="rules"
                     hide-details="auto"
                   ></v-text-field>
                   <v-text-field
                     :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                    :rules="rules"
                     :type="show1 ? 'text' : 'password'"
                     label="密码"
                     @click:append="show1 = !show1"
@@ -51,7 +49,7 @@
           <v-row align="center" justify="space-around">
             <v-btn @click="gotoRegister">注册</v-btn>
             <router-link to="/home">
-              <v-btn>登陆</v-btn>
+              <v-btn @click="btnLogin">登陆</v-btn>
             </router-link>
           </v-row>
         </template>
@@ -62,10 +60,20 @@
 </template>
 
 <script>
+// import { loginApi } from '@/api/login'
+// import request from '@/js/request'
+// import { sendMsgApi } from '@/api/login'
 export default {
   name: 'LoginBox',
   data() {
     return {
+      form: {
+        username: '',
+        password: '',
+        isCus: true,
+        register: false
+      },
+      loading: false,
       tab: null,
       items: ['农户', '买家'],
       rules: {
@@ -73,16 +81,22 @@ export default {
         min: (v) => v.length >= 8 || 'Min 8 characters',
         emailMatch: () => ''
       },
-      show1: false,
-      register: false
+      show1: false
     }
   },
   methods: {
     gotoRegister() {
-      this.$emit('register', this.register)
+      this.$emit('register', this.form.register)
     }
+    // async btnLogin() {
+    //   // const res = await sendMsgApi(this.form)
+    //   console.log(res)
+    // }
   }
 }
+// login() {
+//   // this.$http.post('/user/sendMsg', { phone: '15258677667' })
+// }
 </script>
 
 <style lang="less" scoped>

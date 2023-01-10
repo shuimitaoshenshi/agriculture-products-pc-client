@@ -33,6 +33,7 @@ export default {
     },
     backLogin(val) {
       this.isRegister = val
+      // this.$http.get
     }
   }
 }

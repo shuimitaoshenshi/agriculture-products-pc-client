@@ -84,6 +84,7 @@
           >
             删除
           </v-btn>
+          <v-btn @click="test"></v-btn>
         </v-card-actions>
         <!-- 增改按钮 -->
       </v-card>
@@ -158,6 +159,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -180,6 +182,11 @@ export default {
     }
   },
   methods: {
+    async test() {
+      const res = await axios.get('/api/addressBook/list')
+      console.log(res)
+      console.log(1)
+    },
     changeAddress(id) {
       console.log('change')
       const contentId = 'current_content_' + id

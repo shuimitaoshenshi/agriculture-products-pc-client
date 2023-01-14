@@ -8,14 +8,23 @@ import GoodCart from '@/views/GoodCart/GoodCart.vue'
 import MyAddress from '@/components/myinfo/MyAddress.vue'
 import AgentInfo from '@/components/myinfo/AgentInfo.vue'
 import MyStar from '@/components/myinfo/MyStar.vue'
+import LoginBox from '@/components/login/LoginBox.vue'
+import RegisterBox from '@/components/login/RegisterBox.vue'
 Vue.use(VueRouter)
 
 const routes = [
   { path: '/', redirect: '/home' },
   { path: '/home', component: Home },
   { path: '/home/:sort', component: Home },
-  { path: '/login', component: Login },
-  { path: '/register', component: Login },
+  {
+    path: '/login',
+    component: Login,
+    redirect: '/login/login',
+    children: [
+      { path: 'login', component: LoginBox },
+      { path: 'register', component: RegisterBox }
+    ]
+  },
   { path: '/info', component: GoodInfo },
   {
     path: '/my',

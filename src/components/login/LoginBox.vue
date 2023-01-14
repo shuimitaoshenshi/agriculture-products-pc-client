@@ -42,15 +42,20 @@
               </template>
             </div>
             <!-- 登陆输入框 -->
+            <!-- 错误提示 -->
+            <v-card-text red v-if="hint !== '' || hint === null">
+              {{ hint }}
+            </v-card-text>
+            <!-- 错误提示 -->
           </v-card>
           <!-- 按钮 -->
           <div class="login-button">
             <template>
               <v-row align="center" justify="space-around">
                 <v-btn @click="gotoRegister">注册</v-btn>
-                <router-link to="/home">
-                  <v-btn @click="btnLogin(item)">登陆</v-btn>
-                </router-link>
+                <!-- <router-link to="/home"> -->
+                <v-btn @click="btnLogin(item)">登陆</v-btn>
+                <!-- </router-link> -->
               </v-row>
             </template>
           </div>
@@ -71,6 +76,7 @@ export default {
         name: '',
         password: ''
       },
+      hint: '',
       register: false,
       loading: false,
       tab: null,
@@ -86,16 +92,32 @@ export default {
   methods: {
     gotoRegister() {
       this.$emit('register', this.register)
+      this.$router.push('/login/register')
+    },
+    updataHint(hint) {
+      this.hint = hint
     },
     async btnLogin(item) {
+      if (this.form.name === '' || this.form.password === '') {
+        return this.updataHint('用户名和密码不能为空')
+      }
+      this.hint = ''
+      let res
       if (item === '商家') {
-        const res = await userLoginApi(this.form)
+        res = await sellerLoginApi(this.form)
         console.log(res)
       } else {
-        const res = await sellerLoginApi(this.form)
+        res = await userLoginApi(this.form)
         console.log(res)
       }
+      this.updataHint(res.data.msg)
+      if (res.data.data) {
+        this.$router.push('/home')
+      }
     }
+  },
+  mounted() {
+    this.updataHint()
   }
 }
 </script>

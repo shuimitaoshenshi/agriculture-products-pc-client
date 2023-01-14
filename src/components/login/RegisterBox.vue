@@ -33,30 +33,40 @@
                   ></v-text-field>
                   <v-text-field
                     label="创建密码"
+                    :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                    :type="show1 ? 'text' : 'password'"
+                    @click:append="show1 = !show1"
                     v-model="form.password"
                   ></v-text-field>
                   <v-text-field
                     label="确认密码"
+                    :type="show1 ? 'text' : 'password'"
                     v-model="comfirmpassword"
                   ></v-text-field>
                 </div>
               </template>
             </div>
             <!-- 注册输入框 -->
+            <!-- 错误提示 -->
+            <v-card-text v-if="hint !== '' || hint === null">
+              {{ hint }}
+            </v-card-text>
+            <!-- 错误提示 -->
           </v-card>
           <!-- 按钮 -->
           <div class="login-button">
             <template>
               <v-row align="center" justify="space-around">
-                <router-link to="/login">
-                  <v-btn
-                    @click="
-                      btnRegister()
-                      sucRegister()
-                    "
-                    >确认注册</v-btn
-                  >
-                </router-link>
+                <!-- <router-link to="/login"> -->
+                <v-btn
+                  @click="
+                    btnRegister(item)
+                    sucRegister()
+                  "
+                  >确认注册</v-btn
+                >
+                <v-btn @click="gotoLogin">返回登陆</v-btn>
+                <!-- </router-link> -->
               </v-row>
             </template>
           </div>
@@ -77,29 +87,53 @@ export default {
         name: '',
         password: ''
       },
+      hint: '',
+      show1: false,
       comfirmpassword: '',
       tab: null,
       items: ['商家', '买家'],
-      rules: [
-        (value) => !!value || 'Required.',
-        (value) => (value && value.length >= 3) || 'Min 3 characters'
-      ],
       isRegister: true
     }
   },
+
   methods: {
     sucRegister() {
       this.$emit('suc-register', this.isRegister)
     },
+    gotoLogin() {
+      this.$router.push('/login')
+    },
+    updataHint(hint) {
+      this.hint = hint
+    },
     async btnRegister(item) {
-      if (item === '商家') {
-        const res = await userRegisterApi(this.form)
-        console.log(res)
+      if (
+        this.form.name === '' ||
+        this.form.password === '' ||
+        this.comfirmpassword === ''
+      ) {
+        return this.updataHint('用户名和密码不能为空')
+      }
+      if (this.form.password === this.comfirmpassword) {
+        this.hint = ''
+        let res
+        if (item === '商家') {
+          res = await sellerRegisterApi(this.form)
+          console.log(res)
+        } else {
+          res = await userRegisterApi(this.form)
+          console.log(res)
+        }
+        this.updataHint(res.data.msg)
+        if (res.status !== 200) return this.updataHint(res.data.msg)
+        this.$router.push('/login')
       } else {
-        const res = await sellerRegisterApi(this.form)
-        console.log(res)
+        this.updataHint('两次密码不一致')
       }
     }
+  },
+  mounted() {
+    this.updataHint()
   }
 }
 </script>

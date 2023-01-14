@@ -6,6 +6,8 @@ import $ from 'jquery'
 import '@/bootstrap/css/bootstrap.min.css'
 import '@/bootstrap/js/bootstrap.min.js'
 import '@/assets/css/base.css'
+import '@mdi/font/css/materialdesignicons.css'
+
 // import axios from 'axios'
 // import request from './js/request'
 // axios.defaults.baseURL = 'http://127.0.0.1:8080'

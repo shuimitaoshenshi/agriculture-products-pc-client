@@ -11,20 +11,21 @@
       <img src="@/assets/name.png" alt="" class="name" />
       <img src="@/assets/logo.png" alt="" class="logo" />
     </div>
-    <LoginBox v-if="isRegister" @register="goRegister"></LoginBox>
-    <RegisterBox v-else @suc-register="backLogin"></RegisterBox>
+    <router-view></router-view>
+    <!-- <LoginBox v-if="isRegister" @register="goRegister"></LoginBox>
+    <RegisterBox v-else @suc-register="backLogin"></RegisterBox> -->
   </div>
 </template>
 
 <script>
-import LoginBox from '@/components/login/LoginBox.vue'
-import RegisterBox from '@/components/login/RegisterBox.vue'
+// import LoginBox from '@/components/login/LoginBox.vue'
+// import RegisterBox from '@/components/login/RegisterBox.vue'
 export default {
   name: 'FarmCusLogin',
-  components: { LoginBox, RegisterBox },
+  // components: { LoginBox, RegisterBox },
   data() {
     return {
-      isRegister: true
+      // isRegister: true
     }
   },
   methods: {

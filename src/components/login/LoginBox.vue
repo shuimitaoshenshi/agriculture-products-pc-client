@@ -29,8 +29,10 @@
                   <v-text-field
                     label="用户名"
                     hide-details="auto"
+                    v-model="form.name"
                   ></v-text-field>
                   <v-text-field
+                    v-model="form.password"
                     :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                     :type="show1 ? 'text' : 'password'"
                     label="密码"
@@ -41,41 +43,38 @@
             </div>
             <!-- 登陆输入框 -->
           </v-card>
+          <!-- 按钮 -->
+          <div class="login-button">
+            <template>
+              <v-row align="center" justify="space-around">
+                <v-btn @click="gotoRegister">注册</v-btn>
+                <router-link to="/home">
+                  <v-btn @click="btnLogin(item)">登陆</v-btn>
+                </router-link>
+              </v-row>
+            </template>
+          </div>
+          <!-- 按钮 -->
         </v-tab-item>
       </v-tabs-items>
-      <!-- 按钮 -->
-      <div class="login-button">
-        <template>
-          <v-row align="center" justify="space-around">
-            <v-btn @click="gotoRegister">注册</v-btn>
-            <router-link to="/home">
-              <v-btn @click="btnLogin">登陆</v-btn>
-            </router-link>
-          </v-row>
-        </template>
-      </div>
-      <!-- 按钮 -->
     </v-card>
   </div>
 </template>
 
 <script>
-// import { loginApi } from '@/api/login'
-// import request from '@/js/request'
-// import { sendMsgApi } from '@/api/login'
+import { userLoginApi, sellerLoginApi } from '@/api/login'
 export default {
   name: 'LoginBox',
   data() {
     return {
       form: {
-        username: '',
-        password: '',
-        isCus: true,
-        register: false
+        name: '',
+        password: ''
       },
+      register: false,
       loading: false,
       tab: null,
-      items: ['农户', '买家'],
+      items: ['商家', '买家'],
       rules: {
         required: (value) => !!value || 'Required.',
         min: (v) => v.length >= 8 || 'Min 8 characters',
@@ -86,17 +85,19 @@ export default {
   },
   methods: {
     gotoRegister() {
-      this.$emit('register', this.form.register)
+      this.$emit('register', this.register)
+    },
+    async btnLogin(item) {
+      if (item === '商家') {
+        const res = await userLoginApi(this.form)
+        console.log(res)
+      } else {
+        const res = await sellerLoginApi(this.form)
+        console.log(res)
+      }
     }
-    // async btnLogin() {
-    //   // const res = await sendMsgApi(this.form)
-    //   console.log(res)
-    // }
   }
 }
-// login() {
-//   // this.$http.post('/user/sendMsg', { phone: '15258677667' })
-// }
 </script>
 
 <style lang="less" scoped>
@@ -105,6 +106,12 @@ export default {
   width: 500px;
   margin: 20px auto 0;
   text-align: center;
+  .test {
+    display: inline-block;
+    width: 100px;
+    height: 10px;
+    background-color: #fff;
+  }
   //登陆标题
   .v-toolbar__title {
     font-size: 2rem;

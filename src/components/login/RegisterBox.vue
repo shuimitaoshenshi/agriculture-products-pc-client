@@ -28,40 +28,58 @@
                 <div>
                   <v-text-field
                     label="创建用户名"
-                    :rules="rules"
                     hide-details="auto"
+                    v-model="form.name"
                   ></v-text-field>
-                  <v-text-field label="创建密码"></v-text-field>
-                  <v-text-field label="确认密码"></v-text-field>
+                  <v-text-field
+                    label="创建密码"
+                    v-model="form.password"
+                  ></v-text-field>
+                  <v-text-field
+                    label="确认密码"
+                    v-model="comfirmpassword"
+                  ></v-text-field>
                 </div>
               </template>
             </div>
             <!-- 注册输入框 -->
           </v-card>
+          <!-- 按钮 -->
+          <div class="login-button">
+            <template>
+              <v-row align="center" justify="space-around">
+                <router-link to="/login">
+                  <v-btn
+                    @click="
+                      btnRegister()
+                      sucRegister()
+                    "
+                    >确认注册</v-btn
+                  >
+                </router-link>
+              </v-row>
+            </template>
+          </div>
+          <!-- 按钮 -->
         </v-tab-item>
       </v-tabs-items>
-      <!-- 按钮 -->
-      <div class="login-button">
-        <template>
-          <v-row align="center" justify="space-around">
-            <router-link to="/login">
-              <v-btn @click="sucRegister">确认注册</v-btn>
-            </router-link>
-          </v-row>
-        </template>
-      </div>
-      <!-- 按钮 -->
     </v-card>
   </div>
 </template>
 
 <script>
+import { userRegisterApi, sellerRegisterApi } from '@/api/login'
 export default {
   name: 'RegisterBox',
   data() {
     return {
+      form: {
+        name: '',
+        password: ''
+      },
+      comfirmpassword: '',
       tab: null,
-      items: ['农户', '买家'],
+      items: ['商家', '买家'],
       rules: [
         (value) => !!value || 'Required.',
         (value) => (value && value.length >= 3) || 'Min 3 characters'
@@ -72,6 +90,15 @@ export default {
   methods: {
     sucRegister() {
       this.$emit('suc-register', this.isRegister)
+    },
+    async btnRegister(item) {
+      if (item === '商家') {
+        const res = await userRegisterApi(this.form)
+        console.log(res)
+      } else {
+        const res = await sellerRegisterApi(this.form)
+        console.log(res)
+      }
     }
   }
 }

@@ -13,7 +13,7 @@ import RegisterBox from '@/components/login/RegisterBox.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', redirect: '/home' },
+  { path: '/', redirect: '/login' },
   { path: '/home', component: Home },
   { path: '/home/:sort', component: Home },
   {

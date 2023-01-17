@@ -12,15 +12,18 @@
         >
           <v-row>
             <v-col cols="2">
-              <v-card-text>{{ item.reciever }}</v-card-text>
+              <v-card-text>收货人：{{ item.consignee }}</v-card-text>
             </v-col>
             <v-col cols="2">
-              <v-card-text>{{ item.tele }}</v-card-text>
+              <v-card-text>手机号：{{ item.phone }}</v-card-text>
             </v-col>
           </v-row>
-
+          <v-card-text
+            >{{ item.provinceName }}{{ item.cityName
+            }}{{ item.districtName }}</v-card-text
+          >
           <!-- 地址 -->
-          <v-card-text>{{ item.address }}</v-card-text>
+          <v-card-text>详细地址：{{ item.detail }}</v-card-text>
 
           <!-- 地址 -->
         </div>
@@ -29,7 +32,7 @@
         <div
           class="changeContent"
           ref="changeContentRef"
-          :id="'change_content_' + item.id"
+          :id="'change_content_'"
           style="display: none"
         >
           <v-card-text>
@@ -38,9 +41,9 @@
                 <v-text-field
                   outlined
                   dense
-                  label="收件人"
+                  label="收货人"
                   clearable
-                  v-model="item.reciever"
+                  v-model="item.consignee"
                 ></v-text-field>
               </v-col>
               <v-col>
@@ -49,8 +52,42 @@
                   dense
                   label="手机号"
                   clearable
-                  v-model="item.tele"
+                  v-model="item.phone"
                 ></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <v-select
+                  :items="province"
+                  label="省"
+                  item-text="name"
+                  :item-value="(item) => item"
+                  v-model="currentProvince"
+                  outlined
+                  @change="createCity"
+                ></v-select>
+              </v-col>
+              <v-col>
+                <v-select
+                  :items="city"
+                  label="市"
+                  item-text="name"
+                  :item-value="(item) => item"
+                  v-model="currentCity"
+                  outlined
+                  @change="createDistrict"
+                ></v-select>
+              </v-col>
+              <v-col>
+                <v-select
+                  :items="district"
+                  label="区"
+                  item-text="name"
+                  :item-value="(item) => item"
+                  outlined
+                  v-model="currentDistrict"
+                ></v-select>
               </v-col>
             </v-row>
           </v-card-text>
@@ -58,9 +95,9 @@
             <v-text-field
               outlined
               dense
-              label="地址"
+              label="详细地址"
               clearable
-              v-model="item.address"
+              v-model="item.detail"
             ></v-text-field>
           </v-card-text>
         </div>
@@ -72,7 +109,7 @@
             color="deep-purple lighten-2"
             outlined
             text
-            @click="changeAddress(item.id)"
+            @click="changeAddress(item)"
           >
             修改
           </v-btn>
@@ -80,11 +117,12 @@
             color="deep-purple lighten-2"
             outlined
             text
-            @click="deleteAddress(item.id, index)"
+            @click="deleteAddress(item)"
           >
             删除
           </v-btn>
-          <v-btn @click="test"></v-btn>
+          <v-btn @click="test">地址</v-btn>
+          <v-btn @click="login">登陆</v-btn>
         </v-card-actions>
         <!-- 增改按钮 -->
       </v-card>
@@ -106,9 +144,9 @@
                 <v-text-field
                   outlined
                   dense
-                  label="收件人"
+                  label="收货人"
                   clearable
-                  v-model="newAddress.reciever"
+                  v-model="newAddress.consignee"
                 ></v-text-field>
               </v-col>
               <v-col>
@@ -117,8 +155,42 @@
                   dense
                   label="手机号"
                   clearable
-                  v-model="newAddress.tele"
+                  v-model="newAddress.phone"
                 ></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <v-select
+                  :items="province"
+                  label="省"
+                  item-text="name"
+                  :item-value="(item) => item"
+                  v-model="currentProvince"
+                  outlined
+                  @change="createCity"
+                ></v-select>
+              </v-col>
+              <v-col>
+                <v-select
+                  :items="city"
+                  label="市"
+                  item-text="name"
+                  :item-value="(item) => item"
+                  v-model="currentCity"
+                  outlined
+                  @change="createDistrict"
+                ></v-select>
+              </v-col>
+              <v-col>
+                <v-select
+                  :items="district"
+                  label="区"
+                  item-text="name"
+                  :item-value="(item) => item"
+                  v-model="currentDistrict"
+                  outlined
+                ></v-select>
               </v-col>
             </v-row>
           </v-card-text>
@@ -126,9 +198,9 @@
             <v-text-field
               outlined
               dense
-              label="地址"
+              label="详细地址"
               clearable
-              v-model="newAddress.address"
+              v-model="newAddress.detail"
             ></v-text-field>
           </v-card-text>
         </div>
@@ -140,14 +212,15 @@
             color="deep-purple lighten-2"
             outlined
             text
-            @click="
-              addAddress(
-                newAddress.reciever,
-                newAddress.tele,
-                newAddress.address
-              )
-            "
+            @click="addAddress(newAddress)"
           >
+            <!-- @click="
+              addAddress(
+                newAddress.consignee,
+                newAddress.phone,
+                newAddress.detail
+              )
+            " -->
             添加地址
           </v-btn>
         </v-card-actions>
@@ -160,35 +233,99 @@
 
 <script>
 import axios from 'axios'
+import addressAll from '@/assets/address.json'
+import {
+  addAddressApi,
+  getAddressApi,
+  changeAddressApi,
+  deleteAddressApi
+} from '@/api/address'
 export default {
   data() {
     return {
-      addresses: [
-        { id: 1, address: '东湖', reciever: 'xxx', tele: '123545' },
-        { id: 2, address: '东湖', reciever: 'xxx', tele: '123545' },
-        { id: 3, address: '东湖', reciever: 'xxx', tele: '123545' },
-        { id: 4, address: '东湖', reciever: 'xxx', tele: '123545' },
-        { id: 5, address: '东湖', reciever: 'xxx', tele: '123545' },
-        { id: 6, address: '东湖', reciever: 'xxx', tele: '123545' },
-        { id: 7, address: '东湖', reciever: 'xxx', tele: '123545' }
-      ],
+      addresses: [],
+      province: [],
+      currentProvince: () => {},
+      city: [],
+      currentCity: () => {},
+      district: [],
+      currentDistrict: () => {},
       newAddress: {
-        // id未定
-        id: 99999,
-        address: '',
-        reciever: '',
-        tele: ''
+        id: 0,
+        detail: '',
+        consignee: '',
+        phone: ''
       }
     }
   },
+  created() {
+    this.createProvince()
+    // this.getAddresses()
+  },
+  mounted() {
+    this.getAddresses()
+  },
   methods: {
-    async test() {
-      const res = await axios.get('/api/addressBook/list')
-      console.log(res)
-      console.log(1)
+    async getAddresses() {
+      const { data: res } = await getAddressApi()
+      console.log(res.data)
+      this.addresses = res.data
     },
-    changeAddress(id) {
-      console.log('change')
+    createProvince() {
+      this.province = []
+      addressAll.forEach((item) => {
+        const obj = {}
+        obj.name = item.name
+        obj.code = item.code
+        obj.children = item.children
+        this.province.push(obj)
+        // console.log(obj)
+      })
+    },
+    createCity() {
+      this.city = []
+      console.log(this.currentProvince)
+      this.currentProvince.children.forEach((item) => {
+        const obj = {}
+        obj.name = item.name
+        obj.code = item.code
+        obj.children = item.children
+        this.city.push(obj)
+        // console.log(obj)
+      })
+    },
+    createDistrict() {
+      this.district = []
+      console.log(this.currentCity)
+      this.currentCity.children.forEach((item) => {
+        const obj = {}
+        obj.name = item.name
+        obj.code = item.code
+        // obj.children = item.children
+        this.district.push(obj)
+        // console.log(obj)
+      })
+    },
+
+    async test() {
+      const res = await axios.delete('/api/addressBook', {
+        // detail: 'ppp',
+        // consignee: 'pppppp',
+        // phone: 'pppp',
+        ids: '1614822206972432385'
+      })
+      console.log(res)
+    },
+    async login() {
+      const res = await axios.post('/api/user/login', {
+        name: '张三',
+        password: '123456'
+      })
+      console.log(res)
+    },
+    async changeAddress(item) {
+      // console.log('change')
+      const id = item.id
       const contentId = 'current_content_' + id
       const currentContentRef = this.$refs.currentContentRef
       currentContentRef.forEach((ref) => {
@@ -202,13 +339,35 @@ export default {
           }
         }
       })
+      // 修改item的省市区信息
+      item.provinceName = this.currentProvince.name
+      // data.province_code = this.currentProvince.code
+      item.provinceCode = this.currentProvince.code
+      item.cityName = this.currentCity.name
+      item.cityCode = this.currentCity.code
+      item.districtName = this.currentDistrict.name
+      item.districtCode = this.currentDistrict.code
+      // 清空省市区信息
+      this.currentProvince = {}
+      this.currentCity = {}
+      this.currentDistrict = {}
+      this.city = []
+      this.district = []
       // TODO: 发送修改信息
+      const res = await changeAddressApi(item)
+      console.log(res)
     },
-    deleteAddress(id, index) {
-      console.log('delete')
-      const contentId = 'current_content_' + id
-      console.log(contentId)
-      this.addresses.pop(index)
+    // async deleteAddress(id, index) {
+    async deleteAddress(item) {
+      console.log(item)
+      const r = await deleteAddressApi(item.id)
+      console.log(r)
+      this.getAddresses()
+      // const res = await axios.delete('/api/addressBook', item)
+      // console.log(res)
+      // const contentId = 'current_content_' + id
+      // console.log(contentId)
+      // this.addresses.pop(index)
       // const currentContentRef = this.$refs.currentContentRef
       // console.log(currentContentRef[0].parentNode)
       // currentContentRef[0].parentNode.style.display = 'none'
@@ -219,25 +378,37 @@ export default {
       // })
       // TODO: 发送删除信息
     },
-    addAddress(reciever, tele, address) {
+    // addAddress(consignee, phone, detail) {
+    // addAddress(consignee, phone, detail) {
+    addAddress(data) {
       // TODO:发送添加信息
-
-      console.log('add')
-
+      data.provinceName = this.currentProvince.name
+      // data.province_code = this.currentProvince.code
+      data.provinceCode = this.currentProvince.code
+      data.cityName = this.currentCity.name
+      data.cityCode = this.currentCity.code
+      data.districtName = this.currentDistrict.name
+      data.districtCode = this.currentDistrict.code
+      console.log(data)
+      addAddressApi(data)
       // 新建对象
-      const newAddressItem = {}
-      newAddressItem.address = address
-      newAddressItem.tele = tele
-      newAddressItem.reciever = reciever
-      // 加入addresses
-      this.addresses.push(newAddressItem)
-      console.log(this.addresses)
-      // 清空
+      // const newAddressItem = {}
+      // newAddressItem.detail = detail
+      // newAddressItem.phone = phone
+      // newAddressItem.consignee = consignee
+      // // 加入addresses
+      // this.addresses.push(newAddressItem)
+      // console.log(this.addresses)
+      // // 清空
 
-      this.newAddress.address = ''
-      this.newAddress.tele = ''
-      this.newAddress.reciever = ''
-
+      this.newAddress.detail = ''
+      this.newAddress.phone = ''
+      this.newAddress.consignee = ''
+      this.currentProvince = {}
+      this.currentCity = {}
+      this.currentDistrict = {}
+      this.city = []
+      this.district = []
       // TODO 验证
     }
   }

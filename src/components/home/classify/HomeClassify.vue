@@ -4,7 +4,7 @@
       <v-tabs dark background-color="teal darken-3" show-arrows>
         <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
 
-        <v-tab v-for="{ id, name } in sorts" :key="id">
+        <v-tab v-for="{ id, name } in category" :key="id">
           <a :href="'#/home/' + name">{{ name }}</a>
         </v-tab>
       </v-tabs>
@@ -15,7 +15,7 @@
 <script>
 export default {
   props: {
-    sorts: {
+    category: {
       type: Object,
       default: () => {}
     }

@@ -4,18 +4,19 @@
     <div class="main">
       <Carousel></Carousel>
       <BackTop></BackTop>
-      <Classify :sorts="sorts"></Classify>
-      <div class="goods" v-for="{ id, name } in sorts" :key="id">
+      <Classify :category="category"></Classify>
+      <div class="goods" v-for="{ id, name } in category" :key="id">
         <a :name="'/home/' + name">
           <h2>{{ name }}</h2>
         </a>
-        <WaterFall :sorts="name"></WaterFall>
+        <WaterFall :category="name"></WaterFall>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { getCategoryApi } from '@/api/home'
 import Head from '@/components/Head.vue'
 import Carousel from '@/components/carousel/Carousel.vue'
 import WaterFall from '@/components/home/goods/WaterFall.vue'
@@ -32,7 +33,7 @@ export default {
   },
   data() {
     return {
-      sorts: [
+      category: [
         {
           id: 1,
           name: '111'
@@ -50,6 +51,16 @@ export default {
           name: '411'
         }
       ]
+    }
+  },
+  created() {
+    this.getCategory()
+  },
+  methods: {
+    async getCategory() {
+      const { data: res } = await getCategoryApi()
+      this.category = res.data
+      console.log(res)
     }
   }
 }

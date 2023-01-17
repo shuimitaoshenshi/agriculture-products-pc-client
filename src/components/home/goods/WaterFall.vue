@@ -39,7 +39,7 @@ import GoodItem from '@/components/goods/GoodItem.vue'
 export default {
   name: 'WaterFall',
   props: {
-    sorts: {
+    category: {
       type: String
     }
   },

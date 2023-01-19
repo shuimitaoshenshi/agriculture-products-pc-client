@@ -10,6 +10,7 @@ import AgentInfo from '@/components/myinfo/AgentInfo.vue'
 import MyStar from '@/components/myinfo/MyStar.vue'
 import LoginBox from '@/components/login/LoginBox.vue'
 import RegisterBox from '@/components/login/RegisterBox.vue'
+import Coupon from '@/components/myinfo/MyCoupon.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -33,7 +34,8 @@ const routes = [
       { path: '', component: MyAddress },
       { path: 'address', component: MyAddress },
       { path: 'star', component: MyStar },
-      { path: 'agent', component: AgentInfo }
+      { path: 'agent', component: AgentInfo },
+      { path: 'coupon', component: Coupon }
     ]
   },
   { path: '/cart', component: GoodCart }

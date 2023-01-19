@@ -56,6 +56,7 @@ export default {
       },
       items: [
         { title: '订单', url: '/my/order' },
+        { title: '优惠券', url: '/my/coupon' },
         { title: '收藏', url: '/my/star' },
         { title: '地址管理', url: '/my/address' }
       ]

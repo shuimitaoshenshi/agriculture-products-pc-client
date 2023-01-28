@@ -15,7 +15,11 @@
           :store="item.store"
           :isNewCus="item.isNewCus"
           :sort="item.sort"
-        ></GoodItem>
+        >
+          <div class="button">
+            <v-btn color="success"> 立即选购 </v-btn>
+          </div>
+        </GoodItem>
       </router-link>
     </div>
     <div class="items" v-for="item in goods" :key="item.id">
@@ -28,7 +32,11 @@
           :rand="item.rand"
           :sales="item.sales"
           :store="item.store"
-        ></GoodItem>
+        >
+          <div class="button">
+            <v-btn color="success"> 立即选购 </v-btn>
+          </div>
+        </GoodItem>
       </router-link>
     </div>
   </div>

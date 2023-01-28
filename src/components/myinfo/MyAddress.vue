@@ -121,8 +121,8 @@
           >
             删除
           </v-btn>
-          <v-btn @click="test">地址</v-btn>
-          <v-btn @click="login">登陆</v-btn>
+          <!-- <v-btn @click="test">地址</v-btn>
+          <v-btn @click="login">登陆</v-btn> -->
         </v-card-actions>
         <!-- 增改按钮 -->
       </v-card>

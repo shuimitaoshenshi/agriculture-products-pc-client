@@ -73,6 +73,8 @@ export default {
 
 <style lang="less" scoped>
 .head-container {
+  // position: fixed;
+  z-index: 999;
   width: 100%;
   height: 50px;
   .navbar-brand {

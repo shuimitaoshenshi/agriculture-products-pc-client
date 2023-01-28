@@ -6,9 +6,7 @@
       <span>新客专享</span>
     </div>
     <div class="left">
-      <div class="pic">
-        <img :src="pic" alt="111" />
-      </div>
+      <div class="pic"><img :src="pic" alt="111" /></div>
     </div>
     <div class="right">
       <div class="top">
@@ -16,13 +14,8 @@
         <div class="price">¥{{ price }}</div>
       </div>
       <div class="bottom">
-        <div class="store">库存{{ store }}件</div>
-        <slot>
-          <div class="button">
-            <v-btn color="success"> 立即选购 </v-btn>
-          </div>
-        </slot>
-        <slot name="goodcart"> 1 </slot>
+        <div class="store clearfix">库存{{ store }}件</div>
+        <slot> </slot>
       </div>
     </div>
   </div>

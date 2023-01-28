@@ -17,9 +17,12 @@
       </div>
       <div class="bottom">
         <div class="store">库存{{ store }}件</div>
-        <div class="button">
-          <v-btn color="success"> 立即选购 </v-btn>
-        </div>
+        <slot>
+          <div class="button">
+            <v-btn color="success"> 立即选购 </v-btn>
+          </div>
+        </slot>
+        <slot name="goodcart"> 1 </slot>
       </div>
     </div>
   </div>

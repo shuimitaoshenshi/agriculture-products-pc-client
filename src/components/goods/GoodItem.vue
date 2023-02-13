@@ -83,7 +83,8 @@ export default {
   display: flex;
   margin: 5px;
   padding: 5px;
-  background-color: grey;
+  background-color: #fff;
+  border: black solid 1px;
   // padding-top: @randHeight;
   // flex-wrap: wrap;
   > .rand {

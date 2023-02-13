@@ -4,7 +4,7 @@
       <v-btn
         v-show="backTopShow"
         class="goTop"
-        color="yellow"
+        color="success"
         fab
         small
         dark

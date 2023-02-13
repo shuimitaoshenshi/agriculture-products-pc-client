@@ -21,6 +21,7 @@
               :rand="item.rand"
               :sales="item.sales"
               :store="item.store"
+              style="width: 500px"
             >
               <!-- <div class="counter">
               <button class="subtract">-</button>
@@ -184,7 +185,7 @@ a:active {
   color: #333;
 }
 .items {
-  font-size: 32px;
+  font-size: 16px;
   .counter {
     float: left;
     display: block;
@@ -232,7 +233,7 @@ a:active {
   border: 1px solid #e6e6e6;
 }
 .btn-numbox .count .input-num {
-  width: 58px;
+  width: 40px;
   height: 26px;
   color: #333;
   border-left: 0;

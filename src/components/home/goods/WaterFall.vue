@@ -299,7 +299,7 @@ a:active {
   color: #333;
 }
 .waterfall-container {
-  background-color: blue;
+  background-color: rgb(44, 103, 92);
   display: block;
   // height: 100px;
   .title {

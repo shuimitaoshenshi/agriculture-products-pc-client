@@ -11,6 +11,11 @@ import MyStar from '@/components/myinfo/MyStar.vue'
 import LoginBox from '@/components/login/LoginBox.vue'
 import RegisterBox from '@/components/login/RegisterBox.vue'
 import Coupon from '@/components/myinfo/MyCoupon.vue'
+import UndeliveredOrder from '@/components/myinfo/OrderKinds/UndeliveredOrder.vue'
+import UnpaidOrder from '@/components/myinfo/OrderKinds/UnpaidOrder.vue'
+import AllOrder from '@/components/myinfo/OrderKinds/AllOrder.vue'
+import MyOrderKinds from '@/views/MyInfo/MyOrderKinds.vue'
+import AftersaleOrder from '@/components/myinfo/OrderKinds/AftersaleOrder.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -35,7 +40,18 @@ const routes = [
       { path: 'address', component: MyAddress },
       { path: 'star', component: MyStar },
       { path: 'agent', component: AgentInfo },
-      { path: 'coupon', component: Coupon }
+      { path: 'coupon', component: Coupon },
+      {
+        path: 'order',
+        component: MyOrderKinds,
+        children: [
+          { path: '', component: AllOrder },
+          { path: '/myorder/all', component: AllOrder },
+          { path: '/myorder/unpaid', component: UnpaidOrder },
+          { path: '/myorder/undelivered', component: UndeliveredOrder },
+          { path: '/myorder/aftersale', component: AftersaleOrder }
+        ]
+      }
     ]
   },
   { path: '/cart', component: GoodCart }

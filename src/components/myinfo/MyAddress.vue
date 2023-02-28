@@ -410,6 +410,8 @@ export default {
       this.city = []
       this.district = []
       // TODO 验证
+      // 更新
+      this.getAddresses()
     }
   }
 }
